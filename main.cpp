@@ -1,19 +1,18 @@
-/* 
- * File:   main.cpp
- * Author: phillipe
- *
- * Created on June 19, 2014, 3:43 PM
- */
-
 #include <cstdlib>
+
+#include "WorkSchedule.h"
+#include "CleaningOperation.h"
+#include "Maintence.h"
 
 using namespace std;
 
-/*
- * 
- */
 int main(int argc, char** argv)
 {
+    WorkSchedule* cleaningWork = new CleaningOperation;
+    WorkSchedule* maintence = new Maintence;
+
+    cleaningWork->threeHourOperation();
+    maintence->threeHourOperation();
 
     return 0;
 }
