@@ -4,7 +4,7 @@ WorkSchedule::WorkSchedule()
 {
 }
 
-void WorkSchedule::threeHourOperation()
+void WorkSchedule::threeHourOperation() const
 {
     startTask();
     hourOneTask();

@@ -7,22 +7,22 @@ Maintence::Maintence()
 {
 }
 
-void Maintence::startTask()
+void Maintence::startTask() const
 {
     cout << "Maintence task started." << endl;
 }
 
-void Maintence::hourOneTask()
+void Maintence::hourOneTask() const
 {
     cout << "Maintence step 1." << endl;
 }
 
-void Maintence::hourTwoTask()
+void Maintence::hourTwoTask() const
 {
     cout << "Maintence step 2." << endl;
 }
 
-void Maintence::hourThreeTask()
+void Maintence::hourThreeTask() const
 {
     cout << "Maintence step 3." << endl;
 }

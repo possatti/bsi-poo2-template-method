@@ -9,10 +9,10 @@ public:
     CleaningOperation();
     virtual ~CleaningOperation();
 protected:
-    virtual void startTask();
-    virtual void hourOneTask();
-    virtual void hourTwoTask();
-    virtual void hourThreeTask();
+    virtual void startTask() const;
+    virtual void hourOneTask() const;
+    virtual void hourTwoTask() const;
+    virtual void hourThreeTask() const;
 };
 
 #endif	/* CLEANINGOPERATION_H */

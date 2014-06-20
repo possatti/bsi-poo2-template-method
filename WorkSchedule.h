@@ -5,13 +5,13 @@ class WorkSchedule
 {
 public:
     WorkSchedule();
-    void threeHourOperation();
+    void threeHourOperation() const;
     virtual ~WorkSchedule();
 protected:
-    virtual void startTask() = 0;
-    virtual void hourOneTask() = 0;
-    virtual void hourTwoTask() = 0;
-    virtual void hourThreeTask() = 0;
+    virtual void startTask() const = 0;
+    virtual void hourOneTask() const = 0;
+    virtual void hourTwoTask() const = 0;
+    virtual void hourThreeTask() const = 0;
 };
 
 #endif	/* WORKSCHEDULE_H */

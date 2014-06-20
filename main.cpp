@@ -8,8 +8,8 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    WorkSchedule* cleaningWork = new CleaningOperation;
-    WorkSchedule* maintence = new Maintence;
+    const WorkSchedule * const cleaningWork = new CleaningOperation;
+    const WorkSchedule * const maintence = new Maintence;
 
     cleaningWork->threeHourOperation();
     maintence->threeHourOperation();
