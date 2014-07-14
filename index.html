@@ -34,13 +34,13 @@
         <h2>
 <a name="descri%C3%A7%C3%A3o-do-padr%C3%A3o" class="anchor" href="#descri%C3%A7%C3%A3o-do-padr%C3%A3o"><span class="octicon octicon-link"></span></a>Descrição do padrão</h2>
 
-<p>O padrão tem a intenção de definir um esqueleto de um algoritmo em uma operação, diferindo em alguns passos de suas subclasses clientes. O padrão deixa subclasses redefinirem certos passos de um algoritmo sem ter que mudar a estrutura do algoritmo.</p>
+<p>O padrão tem a intenção de definir um esqueleto de um algoritmo em uma operação, deixando a responsabilidade da implementação para as classes filhas.</p>
 
-<p>A classe base declara algorimos de base que serão implementados pelas classes derivadas.</p>
+<p>A classe base declara algoritmos de base que serão implementados pelas classes derivadas.</p>
 
 <p><img src="http://sourcemaking.com/files/v2/content/patterns/Template_Method-2x.png" alt="Estrutura do padrão Template Method"></p>
 
-<p>Como é possível notar, o método template chama os outros três seguintes métodos, como se fossem passos. Porém a classe base deixa para as subclasses definirem tais passos.</p>
+<p>Como é possível notar, o método template chama os outros três seguintes métodos, como se fossem passos. Porém a classe base deixa para as subclasses definirem tais passos. A classe pai é uma classe abstrata, que só implementa o <code>templateMethod()</code>, logo não há o risco do cliente instanciar um <code>FrameworkClass</code> sem que os passos do algoritmos estejam implementados.</p>
 
 <h2>
 <a name="explica%C3%A7%C3%A3o-do-exemplo" class="anchor" href="#explica%C3%A7%C3%A3o-do-exemplo"><span class="octicon octicon-link"></span></a>Explicação do Exemplo</h2>
