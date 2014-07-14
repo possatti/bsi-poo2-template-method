@@ -45,6 +45,25 @@
 <h2>
 <a name="explica%C3%A7%C3%A3o-do-exemplo" class="anchor" href="#explica%C3%A7%C3%A3o-do-exemplo"><span class="octicon octicon-link"></span></a>Explicação do Exemplo</h2>
 
+<p>O exemplo trata de uma "agenda de trabalho" que pode ter trabalhos tanto de manutenção quanto de limpeza. Tanto para limpeza quanto para manutenção temos 4 passos a serem feitos: iniciar a tarefa, tarefa da primeira hora, da segunda hora e da terceira hora.</p>
+
+<p>A classe <code>WorkSchedule</code> (<code>FrameworkClass</code>) é a classe abstrata que define a interface da agenda de trabalho. Ela tem o método público <code>void threeHourOperation()</code> que é utilizado pela classe cliente e os métodos protegidos (para que seja implementados, mas não visíveis para o cliente) que definem os passos do algoritmo.</p>
+
+<p><strong>WorkSchedule:</strong></p>
+
+<p>class WorkSchedule
+{
+public:
+    WorkSchedule();
+    void threeHourOperation() const;
+    virtual ~WorkSchedule();
+protected:
+    virtual void startTask() const = 0;
+    virtual void hourOneTask() const = 0;
+    virtual void hourTwoTask() const = 0;
+    virtual void hourThreeTask() const = 0;
+};</p>
+
 <h2>
 <a name="alunos" class="anchor" href="#alunos"><span class="octicon octicon-link"></span></a>Alunos</h2>
 
