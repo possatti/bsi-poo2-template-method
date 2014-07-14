@@ -47,22 +47,154 @@
 
 <p>O exemplo trata de uma "agenda de trabalho" que pode ter trabalhos tanto de manutenção quanto de limpeza. Tanto para limpeza quanto para manutenção temos 4 passos a serem feitos: iniciar a tarefa, tarefa da primeira hora, da segunda hora e da terceira hora.</p>
 
-<p>A classe <code>WorkSchedule</code> (<code>FrameworkClass</code>) é a classe abstrata que define a interface da agenda de trabalho. Ela tem o método público <code>void threeHourOperation()</code> que é utilizado pela classe cliente e os métodos protegidos (para que seja implementados, mas não visíveis para o cliente) que definem os passos do algoritmo.</p>
+<p>A classe <code>WorkSchedule</code> (<code>FrameworkClass</code>) é a classe abstrata que define a interface da agenda de trabalho. Ela tem o método público <code>threeHourOperation()</code> que é utilizado pela classe cliente e os métodos protegidos (para que seja implementados, mas não visíveis para o cliente) que definem os passos do algoritmo.</p>
 
-<p><strong>WorkSchedule:</strong></p>
+<p><strong>WorkSchedule.h:</strong></p>
 
-<p>class WorkSchedule
-{
-public:
-    WorkSchedule();
-    void threeHourOperation() const;
-    virtual ~WorkSchedule();
-protected:
-    virtual void startTask() const = 0;
-    virtual void hourOneTask() const = 0;
-    virtual void hourTwoTask() const = 0;
-    virtual void hourThreeTask() const = 0;
-};</p>
+<div class="highlight highlight-cpp"><pre><span class="k">class</span> <span class="nc">WorkSchedule</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">WorkSchedule</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="n">threeHourOperation</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">WorkSchedule</span><span class="p">();</span>
+<span class="k">protected</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">startTask</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourOneTask</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourTwoTask</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourThreeTask</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+<p><strong>WorkSchedule.cpp:</strong></p>
+
+<div class="highlight highlight-cpp"><pre><span class="n">WorkSchedule</span><span class="o">::</span><span class="n">WorkSchedule</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">WorkSchedule</span><span class="o">::</span><span class="n">threeHourOperation</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">startTask</span><span class="p">();</span>
+    <span class="n">hourOneTask</span><span class="p">();</span>
+    <span class="n">hourTwoTask</span><span class="p">();</span>
+    <span class="n">hourThreeTask</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">WorkSchedule</span><span class="o">::~</span><span class="n">WorkSchedule</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Como podemos ver apenas o método público é implementado. É interessante notar que nesse padrão acontece um caminho inverso ao que geralmente acontece, que é chamar métodos das classes filhas, que nem foram implementados ainda. Também vale notar que o método <code>threeHourOperation()</code> não pode ser implementado pelas classes filhas. Para fazer isso em Java temos que usar a palavra chave <code>final</code> na declaração do método.</p>
+
+<p>As classes filhas <code>CleaningOperation</code> e <code>Maintence</code> tem uma implementação simples, apenas implementando os métodos abstratos <code>startTask()</code>, <code>hourOneTask()</code>, <code>hourTwoTask()</code> e <code>hourThreeTask()</code>.</p>
+
+<p><strong>CleaningOperation.h:</strong></p>
+
+<div class="highlight highlight-cpp"><pre><span class="k">class</span> <span class="nc">CleaningOperation</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkSchedule</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">CleaningOperation</span><span class="p">();</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">CleaningOperation</span><span class="p">();</span>
+<span class="k">protected</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">startTask</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourOneTask</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourTwoTask</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourThreeTask</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+<p><strong>CleaningOperation.cpp:</strong></p>
+
+<div class="highlight highlight-cpp"><pre><span class="n">CleaningOperation</span><span class="o">::</span><span class="n">CleaningOperation</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">CleaningOperation</span><span class="o">::</span><span class="n">startTask</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Cleaning operation started."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">CleaningOperation</span><span class="o">::</span><span class="n">hourOneTask</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Cleaning step 1."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">CleaningOperation</span><span class="o">::</span><span class="n">hourTwoTask</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Cleaning step 2."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">CleaningOperation</span><span class="o">::</span><span class="n">hourThreeTask</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Cleaning step 3."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">CleaningOperation</span><span class="o">::~</span><span class="n">CleaningOperation</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><strong>Maintence.h:</strong></p>
+
+<div class="highlight highlight-cpp"><pre><span class="k">class</span> <span class="nc">Maintence</span> <span class="o">:</span> <span class="k">public</span> <span class="n">WorkSchedule</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Maintence</span><span class="p">();</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">Maintence</span><span class="p">();</span>
+<span class="k">protected</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">startTask</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourOneTask</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourTwoTask</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">hourThreeTask</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+<p><strong>Maintence.cpp:</strong></p>
+
+<div class="highlight highlight-cpp"><pre><span class="n">Maintence</span><span class="o">::</span><span class="n">Maintence</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Maintence</span><span class="o">::</span><span class="n">startTask</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Maintence task started."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Maintence</span><span class="o">::</span><span class="n">hourOneTask</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Maintence step 1."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Maintence</span><span class="o">::</span><span class="n">hourTwoTask</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Maintence step 2."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">Maintence</span><span class="o">::</span><span class="n">hourThreeTask</span><span class="p">()</span> <span class="k">const</span>
+<span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Maintence step 3."</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">Maintence</span><span class="o">::~</span><span class="n">Maintence</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Dessa forma o cliente apenas precisa instanciar uma implementação de <code>WorkSchedule</code> para utilizar a classe.</p>
+
+<p><strong>main.cpp(cliente):</strong></p>
+
+<div class="highlight highlight-cpp"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="n">WorkSchedule</span> <span class="o">*</span> <span class="k">const</span> <span class="n">cleaningWork</span> <span class="o">=</span> <span class="k">new</span> <span class="n">CleaningOperation</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">WorkSchedule</span> <span class="o">*</span> <span class="k">const</span> <span class="n">maintence</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Maintence</span><span class="p">;</span>
+
+    <span class="n">cleaningWork</span><span class="o">-&gt;</span><span class="n">threeHourOperation</span><span class="p">();</span>
+    <span class="n">maintence</span><span class="o">-&gt;</span><span class="n">threeHourOperation</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 
 <h2>
 <a name="alunos" class="anchor" href="#alunos"><span class="octicon octicon-link"></span></a>Alunos</h2>
